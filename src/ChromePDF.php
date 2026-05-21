@@ -151,7 +151,7 @@ class ChromePDF {
 		$command = "'$this->binary_path' --headless --print-to-pdf='$output_path' " . $this->writeOptions() . " '$this->webpath'";
 
 		if ($verbose) echo "Running " . $command . PHP_EOL;
-		exec(posix_getpwuid(posix_geteuid())['shell'] . ' -c "' . $command . '"');
+		$result = shell_exec(posix_getpwuid(posix_geteuid())['shell'] . ' -c "' . $command . '" 2>&1');
 		if ($verbose) echo "File generated: " . $output_path . PHP_EOL;
 
 		return $output_path;
