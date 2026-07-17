@@ -113,6 +113,26 @@ class ChromePDF {
 	}	
 
 	/**
+	 * Ignore certificate errors
+	 * 
+	 * WARNING: This disables Chrome's TLS/SSL certificate validation entirely,
+	 * including checks for expired, self-signed, mismatched-hostname, or
+	 * otherwise untrusted certificates. 
+	 * This makes the tool vulnerable to man-in-the-middle attacks 
+	 * and should NEVER be enabled when connecting over untrusted (external) networks 
+	 * 
+	 * Use ONLY for local development, internal testing against known-safe hosts, 
+	 * or automated test suites where the target server and network 
+	 * are fully controlled and trusted. 
+	 * 
+	 * @param bool $setting Setting Option
+	 * @return void
+	 */
+	public function ignoreCertificateErrors(bool $setting = true) {
+		$this->options['--ignore-certificate-errors'] = $setting;
+	}
+
+	/**
 	 * Write options for the final command
 	 * 
 	 * @return string
